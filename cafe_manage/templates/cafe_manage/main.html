@@ -1,0 +1,146 @@
+<!DOCTYPE HTML>
+{% load static %}
+<html>
+	<head>
+		<title>졸업작품</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="{% static 'assets/css/main.css' %}" />
+		<noscript><link rel="stylesheet" href="{% static 'assets/css/noscript.css' %}" /></noscript>
+		<script src="https://cdn.jsdelivr.net/npm/chart.js@3.3.0/dist/chart.min.js"></script>
+	</head>
+	<body class="is-preload">
+		<!-- Sidebar -->
+			<section id="sidebar">
+				<div class="inner">
+					<nav>
+						<ul>
+							<li><a href="#intro">Home</a></li>
+							<li><a href="#one">Chart</a></li>
+							<li><a href="#two">Review</a></li>
+							<li><a href="#three">Information</a></li>
+						</ul>
+					</nav>
+				</div>
+			</section>
+
+		<!-- Wrapper -->
+			<div id="wrapper">
+
+				<!-- Intro -->
+					<section id="intro" class="wrapper style1 fullscreen fade-up" style="background-color:#FFFFFF">
+						<div class="inner">
+							<h1 style="color:black">졸업작품</h1>
+							<p style="font-size:20px; color:grey;">20141902 김태환</p>
+							<p style="font-size:20px; color:grey;">20184265 이종민</p>
+							<p style="font-size:20px; color:grey;">20184263 이다정</p>
+						</div>
+					</section>
+
+						<section id="one" class="wrapper style1 fullscreen fade-up"style="background-color:#FFFFFF;">
+								<div class="inner">
+									<h3 style="color:#000000;">Chart</h3>
+									<div class="container">
+										<iframe src="/chart" name="a" style="width:100%;height:600px;"></iframe>
+									</div>
+								</div>
+						</section>
+
+				<!-- Two -->
+					<section id="two" class="wrapper style1 fullscreen fade-up" style="background-color:#FFFFFF">
+						<div class="inner">
+							<h2 style="color:#000000;">Review</h2>
+							<div class="container">
+								<iframe src="/review" name="a" style="width:100%;height:600px;"></iframe>
+							</div>
+						</div>
+					</section>
+
+				<!-- Three -->
+					<section id="three" class="wrapper style1 fullscreen fade-up" style="background-color:#FFFFFF">
+						<div class="inner">
+							<h2 style="color:black">Information</h2>
+							<p style="color:#FFFFFF;">Phasellus convallis elit id ullamcorper pulvinar. Duis aliquam turpis mauris, eu ultricies erat malesuada quis. Aliquam dapibus, lacus eget hendrerit bibendum, urna est aliquam sem, sit amet imperdiet est velit quis lorem.</p>
+							<div class="split style1">
+								<section>
+									<form method="post" action="#">
+										<div id="map" style="width:90%;height:400px;">
+											<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=9c2debff5539d9008693e6a5a4c434e9&libraries=services""></script>
+											<script>
+
+												var mapContainer = document.getElementById('map'),
+													mapOption = {
+														center: new kakao.maps.LatLng(33.450701, 126.570667),
+														level: 3
+													};  
+
+												var map = new kakao.maps.Map(mapContainer, mapOption); 
+
+												var geocoder = new kakao.maps.services.Geocoder();
+
+												geocoder.addressSearch('{{ address }}', function(result, status) {
+
+													if (status === kakao.maps.services.Status.OK) {
+												
+														var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+
+														var marker = new kakao.maps.Marker({
+															map: map,
+															position: coords
+														});
+
+														var infowindow = new kakao.maps.InfoWindow({
+															content: '<div style="width:150px;text-align:center;padding:6px 0;color:#000000;font-size:small;">{{ address }}</div>'
+														});
+														infowindow.open(map, marker);
+
+														map.setCenter(coords);
+													} 
+												});    
+												</script>
+										</div>
+									</form>
+								</section>
+								<section>
+									<ul class="contact">
+										<li>
+											<h3 style="color:black">Address</h3>
+											<span style="color:grey;">{{ 우편번호 }} {{ 지번 }}<br />
+											{{ 구 }} {{ 도로명 }}<br />
+											{{ 시 }}</span>
+										</li>
+										<li>
+											<h3 style="color:black">Email</h3>
+											<span style="color:grey;">{{ email }}</span>
+										</li>
+										<li>
+											<h3 style="color:black">Phone</h3>
+											<span style="color:grey;">{{ phone }}</span>
+										</li>
+									</ul>
+								</section>
+							</div>
+						</div>
+					</section>
+
+			</div>
+
+		<!-- Footer -->
+			<footer id="footer" class="wrapper style1-alt">
+				<div class="inner">
+					<ul class="menu">
+						<li>&copy; Untitled. All rights reserved.</li><li>Design: <a href="http://html5up.net">HTML5 UP</a></li>
+					</ul>
+				</div>
+			</footer>
+
+		<!-- Scripts -->
+			<script src="{% static 'assets/js/jquery.min.js' %}"></script>
+			<script src="{% static 'assets/js/jquery.scrollex.min.js' %}"></script>
+			<script src="{% static 'assets/js/jquery.scrolly.min.js' %}"></script>
+			<script src="{% static 'assets/js/browser.min.js' %}"></script>
+			<script src="{% static 'assets/js/breakpoints.min.js '%}"></script>
+			<script src="{% static 'assets/js/util.js' %}"></script>
+			<script src="{% static 'assets/js/main.js' %}"></script>
+	</body>
+</html>

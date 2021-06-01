@@ -1,0 +1,111 @@
+<!doctype html>
+{% load static %}
+<html>
+    <head>
+        <meta charset="utf-8">\
+        <title>Chart</title>
+        <link rel="stylesheet" href="{% static 'assets/css/bootstrap.css' %}">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js@3.3.0/dist/chart.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                    <canvas id="Line_Chart"></canvas>
+                </div>
+                <div class="col-md-6">
+                    <canvas id="Pie_Chart"></canvas>
+                </div>
+            </div>
+        </div>
+        <script>
+            var Line_Chart = document.getElementById('Line_Chart').getContext('2d');
+            var ctx = document.getElementById('Pie_Chart').getContext('2d');
+
+            var lineChart = new Chart(Line_Chart, {
+                type: 'line',
+                data: {
+                    labels: ['9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21'],
+                    datasets: [{
+                        data: ["{{ time_9 }}", '{{time_10}}', '{{time_11}}', '{{time_12}}', '{{time_13}}', '{{time_14}}', '{{time_15}}', '{{time_16}}', '{{time_17}}', '{{time_18}}', '{{time_19}}', '{{time_20}}', '{{time_21}}'],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 1)',
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                        ],
+                        borderWidth: 1,
+                    }]
+                },
+                options: {
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '제목',
+                            font: {
+                                size: 30,
+                            }
+                        },
+                        legend: {
+                            display: false,
+                        },
+                        tooltip: {
+                            enabled: false,
+                        }
+                    },
+                    scales: {
+                        y: {
+                            suggestedMin: 0,
+                            suggestedMax: 0,
+                        }
+                    }
+                }
+            });
+
+            var pieChart = new Chart(Pie_Chart, {
+                type: 'pie',
+                data: {
+                    labels: ['9', '10', '11', '12', '13', '14', '15', '16', '17', '18', '19', '20', '21'],
+                    datasets: [{
+                        data: ["{{ time_9 }}", '{{time_10}}', '{{time_11}}', '{{time_12}}', '{{time_13}}', '{{time_14}}', '{{time_15}}', '{{time_16}}', '{{time_17}}', '{{time_18}}', '{{time_19}}', '{{time_20}}', '{{time_21}}'],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: '제목',
+                            font: {
+                                size: 30,
+                            }
+                        },
+                        legend: {
+                            display: true,
+                            position: 'right',
+                        },
+                        tooltip: {
+                            enabled: true,
+                        }
+                    },
+                }
+            });
+            </script>
+    </body>
+</html>
